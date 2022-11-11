@@ -4,6 +4,7 @@ class Solution
     void sort012(int a[], int n)
     {
         sort(a, a+n);
+        //hello;
     }
     
 };
