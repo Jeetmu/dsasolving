@@ -1,47 +1,67 @@
-#include <iostream>
-#include <cstdlib>
-#include <cmath>
-#include <string>
-
+#include<iostream>
+#include<cstdlib>
+#include<cmath>
+#include<string>
+ 
 using namespace std;
+ 
+int partition(int arr[], int s, int e){
+    int pivot = arr[s];
 
-bool isHappy(int n)
-{
-    int x1;
-    int x2;
-
-    bool count = false;
-
-    while (n > 0)
+    int count = 0;
+    for (int i = s+1; i <= e; i++)
     {
-        x1 = n % 10;
-        cout << "x1 " << x1 <<endl; 
-        x2 = n / 10;
-        cout << "x2 " << x2 <<endl; 
-        n = round(pow(x2, 2)) + round(pow(x1, 2));
-        cout << "n " << n <<endl; 
-
-        if (n == 1)
-        {
-            count = true;
-            break;
+        if(arr[i] <= pivot){
+            count = count + 1;
         }
     }
-    if (count == true)
-    {
-        return true;
+    int pivotIndex = s + count;
+    swap(arr[pivotIndex], arr[s]);
+
+    int i = s;
+    int j = e;
+    while(i < pivotIndex && j > pivotIndex){
+        while(arr[i] < pivot){
+            i++;
+        }
+        while(arr[j] > pivot){
+            j--;
+        }
+        if(i < pivotIndex && j > pivotIndex){
+            swap(arr[i++], arr[j--]);
+        }
     }
-    else
-    {
-        return false;
-    }
+    return pivotIndex;
+    
+}
+
+void quickSort(int arr[], int s, int e){
+
+    //base case
+    if(s >= e)
+        return ;
+    
+    int p = partition(arr, s, e);
+
+    //sort left side
+    quickSort(arr, s, p-1);
+
+    //sort right side
+    quickSort(arr, p+1, e);
 }
 
 int main()
 {
+ 
+    int arr[5] = {2,4,1,6,9};
+    int n = 5;
 
-    int n = 19;
-    isHappy(19);
+    quickSort(arr, 0, n-1);
 
+    for (int i = 0; i < n; i++)
+    {
+        cout<<arr[i] <<" ";
+    }cout << endl;
+    
     return 0;
 };
