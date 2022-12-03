@@ -13,7 +13,7 @@ int partition(int arr[], int s, int e){
     {
         if(arr[i] <= pivot){
             count = count + 1;
-        }
+        } 
     }
     int pivotIndex = s + count;
     swap(arr[pivotIndex], arr[s]);
