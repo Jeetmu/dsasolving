@@ -18,6 +18,16 @@ public:
         this->data = data;
         this->next = NULL;
     }
+    //destructor
+    ~Node(){
+        int value = this->data;
+        //memory free
+        if(this->next != NULL){
+            delete next;
+            this->next = NULL;
+        }
+        cout<<"Memory is free for node "
+<< value<<endl;    }
 };
 
 // insert at head
@@ -73,7 +83,12 @@ void insertAtposition(Node *&tail, Node *&head, int position, int d)
 
 //delete node
 void deleteNode(int position, Node* & head){
-    
+    //delete start node
+    if(position == 1){
+    Node* temp = head;
+    head = head->next;
+    delete temp;
+    }
 }
 
 // traversal - print the linked list
