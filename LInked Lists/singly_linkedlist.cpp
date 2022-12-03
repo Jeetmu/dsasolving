@@ -17,18 +17,19 @@ public:
     {
         this->data = data;
         this->next = NULL;
-        this->data;
     }
-    //destructor
-    ~Node(){
+    // destructor
+    ~Node()
+    {
         int value = this->data;
-        //memory free
-        if(this->next != NULL){
+        // memory free
+        if (this->next != NULL)
+        {
             delete next;
             this->next = NULL;
         }
-        cout<<"Memory is free for node "
-<< value<<endl;    }
+        cout << "Memory is free for node "<< value << endl;
+    }
 };
 
 // insert at head
@@ -82,13 +83,33 @@ void insertAtposition(Node *&tail, Node *&head, int position, int d)
     temp->next = nodeToInsert;
 }
 
-//delete node
-void deleteNode(int position, Node* & head){
-    //delete start node
-    if(position == 1){
-    Node* temp = head;
-    head = head->next;
-    delete temp;
+// delete node
+void deleteNode(int position, Node *&head)
+{
+    // delete start node
+    if (position == 1)
+    {
+        Node *temp = head;
+        head = head->next;
+        //memonru free start node
+        temp->next = NULL;
+        delete temp;
+    }
+    else{
+        //deleting any middle node or last node
+        Node* curr = head;
+        Node* prev = NULL;
+
+        int cnt = 1;
+        while(cnt < position){
+            prev = curr;
+            curr = curr->next;
+            cnt++;
+        }
+        //deleting given data position
+        prev->next = curr->next;
+        curr->next = NULL;
+        delete curr;
     }
 }
 
@@ -107,7 +128,7 @@ void print(Node *&head)
 
 int main()
 {
-    //linked list
+    // linked list
     Node *node1 = new Node(10);
     Node *head = node1;
     Node *tail = node1;
@@ -118,6 +139,12 @@ int main()
     insertAtTail(tail, 15);
     print(head);
     insertAtposition(tail, head, 4, 22);
+    print(head);
+
+    cout << "head "<< head->data << endl;
+    cout << "tail "<<tail->data << endl;
+
+    deleteNode(3,head);
     print(head);
 
     return 0;
