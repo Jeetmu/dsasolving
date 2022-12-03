@@ -17,6 +17,7 @@ public:
     {
         this->data = data;
         this->next = NULL;
+        this->data;
     }
     //destructor
     ~Node(){
