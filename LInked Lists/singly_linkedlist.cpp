@@ -91,7 +91,7 @@ void deleteNode(int position, Node *&head)
     {
         Node *temp = head;
         head = head->next;
-        //memonru free start node
+        //memory free start node
         temp->next = NULL;
         delete temp;
     }
@@ -111,6 +111,25 @@ void deleteNode(int position, Node *&head)
         curr->next = NULL;
         delete curr;
     }
+}
+//reverse
+Node* reverse1(Node* head){
+    if(head == NULL || head->next == NULL){
+     return head;
+    }
+    
+    cout << head->data << " " ;
+    cout << endl;
+
+    Node* chotaHead = reverse1(head-> next);
+    cout << head->data << " " ;
+    
+    head-> next -> next = head;
+    cout << head->data << " " ;
+    head-> next = NULL;
+    
+    
+    return chotaHead;
 }
 
 // traversal - print the linked list
@@ -141,11 +160,12 @@ int main()
     insertAtposition(tail, head, 4, 22);
     print(head);
 
-    cout << "head "<< head->data << endl;
-    cout << "tail "<<tail->data << endl;
+    // cout << "head "<< head->data << endl;
+    // cout << "tail "<<tail->data << endl;
 
-    deleteNode(3,head);
-    print(head);
+    // deleteNode(3,head);
+    // print(head);
+    reverse1(head);
 
     return 0;
 }
